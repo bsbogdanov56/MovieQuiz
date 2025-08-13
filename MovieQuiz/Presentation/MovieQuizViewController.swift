@@ -91,6 +91,10 @@ final class MovieQuizViewController:
                 correctAnswer: false)
         ]
     
+    //метод для сброса рамки
+    private func resetImageBorder() {
+        imageView.layer.borderWidth = 0
+    }
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel( // 1
@@ -102,6 +106,7 @@ final class MovieQuizViewController:
     
     // приватный метод вывода на экран вопроса, который принимает на вход вью модель вопроса и ничего не возвращает
     private func show(quiz step: QuizStepViewModel) {
+      resetImageBorder() // сбрасываем рамку перед показом нового вопроса
       imageView.image = step.image
       textLabel.text = step.question
       counterLabel.text = step.questionNumber
@@ -155,6 +160,7 @@ final class MovieQuizViewController:
             
             let firstQuestion = self.questions[self.currentQuestionIndex]
             let viewModel = self.convert(model: firstQuestion)
+            self.resetImageBorder()
             self.show(quiz: viewModel)
         }
         
